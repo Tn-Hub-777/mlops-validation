@@ -202,6 +202,7 @@ Expected result:
 Restore the original training line before Failure B.
 
 **Failure A workflow run:** TODO — paste the failed GitHub Actions run URL here.
+**Failure A workflow run:** [Run 1: quality gate failure](https://github.com/Tn-Hub-777/mlops-validation/actions/runs/36303943970).
 
 ### Failure B — application failure
 
@@ -232,6 +233,7 @@ Expected result:
 Restore the correct assertion before the final run.
 
 **Failure B workflow run:** TODO — paste the failed GitHub Actions run URL here.
+**Failure B workflow run:** [Run 4: application assertion failure](https://github.com/Tn-Hub-777/mlops-validation/actions/runs/36304386610).
 
 ### Final successful run
 
@@ -246,8 +248,10 @@ Expected result:
 - the model package is uploaded.
 
 **Final successful workflow run:** TODO — paste the successful GitHub Actions run URL here.
+**Final successful workflow run:** [Run 5: successful model package](https://github.com/Tn-Hub-777/mlops-validation/actions/runs/36304428228).
 
 **Successful artifact:** TODO — identify `model-package-run-<RUN_NUMBER>` here.
+**Successful artifact:** `model-package-run-5`.
 
 ## 11. Brief MLOps maturity assessment
 
