@@ -32,7 +32,7 @@ def test_valid_sample_returns_expected_shape_and_type():
             VALID_SAMPLE["entropy"],
         ]]
     )
-    assert result.shape == (2,)
+    assert result.shape == (1,)
     assert hasattr(result[0], "item") or isinstance(result[0], (int, float))
 
 
