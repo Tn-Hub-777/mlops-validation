@@ -1,0 +1,53 @@
+name: MLOps Validation and Delivery
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate-train-test-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate dataset
+        run: python -m scripts.validate_data
+
+      - name: Train baseline and candidate, enforce quality gate
+        run: python -m src.train --output-dir artifacts
+
+      - name: Run application tests
+        run: pytest -q
+
+      - name: Build downloadable model package
+        run: |
+          mkdir -p package
+          cp artifacts/model.joblib package/model.joblib
+          cp artifacts/metrics.json package/metrics.json
+          cp src/predict.py package/predict.py
+          cp requirements.txt package/requirements.txt
+          cp README.md package/README.md
+          echo "Workflow run: $GITHUB_RUN_NUMBER" > package/BUILD_INFO.txt
+          tar -czf "model-package-run-${GITHUB_RUN_NUMBER}.tar.gz" -C package .
+
+      - name: Publish validated model package
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-package-run-${{ github.run_number }}
+          path: model-package-run-${{ github.run_number }}.tar.gz
+          if-no-files-found: error
