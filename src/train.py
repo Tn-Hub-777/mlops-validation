@@ -66,7 +66,7 @@ def main() -> int:
         )
 
         candidate = build_candidate()
-        candidate.fit(X_train.iloc[:1], y_train.iloc[:1])
+        candidate.fit(X_train, y_train)
         model_score = balanced_accuracy_score(
             y_valid, candidate.predict(X_valid)
         )
