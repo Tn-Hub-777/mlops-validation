@@ -32,7 +32,7 @@ jobs:
         run: python -m src.train --output-dir artifacts
 
       - name: Run application tests
-        run: pytest -q
+        run: python -m pytest -q
 
       - name: Build downloadable model package
         run: |

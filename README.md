@@ -318,7 +318,7 @@ python -m src.train --output-dir artifacts
 Run tests after successful training:
 
 ```bash
-pytest -q
+python -m pytest -q
 ```
 
 Run prediction:
